@@ -51,10 +51,10 @@
 
   // testimonials carousel
   const testimonials = [
-    { name:'Noushida A', time:'1 month ago', text:'I can\u2019t thank Dr. Siji Elizabeth enough for the incredible care shown to my daughter! She needed a root canal and laser fillings on her front teeth due to severe decay, and I was naturally very anxious about the whole process. Dr. Siji was so patient, gentle, and reassuring, making my daughter feel completely at ease throughout.' },
-    { name:'Ahmed R', time:'2 months ago', text:'Excellent experience from start to finish. The team explained every step of my implant treatment clearly, the clinic is spotless, and the front desk staff were incredibly welcoming. Highly recommend to anyone in Ajman looking for quality dental care.' },
-    { name:'Fathima S', time:'3 weeks ago', text:'Got my smile makeover done here and I couldn\u2019t be happier with the results. The doctors really listened to what I wanted and the veneers look completely natural. Booking and follow-up appointments were also very smooth.' },
-    { name:'Mohammed K', time:'2 weeks ago', text:'Very professional and gentle dentists. My kids actually enjoy coming here now, which says a lot! The pedodontics team is patient and great with children. Clean, modern clinic with a genuinely caring staff.' }
+    { name:'Ahmed Al Mansoori', time:'1 month ago', text:'The entire experience was excellent. The dentist explained everything clearly and made me feel comfortable throughout the treatment. The clinic is modern, clean and very welcoming.' },
+    { name:'Fatima Al Nuaimi', time:'2 months ago', text:'I was very nervous about dental treatment, but the team made me feel completely at ease. Everything was explained patiently and professionally. Highly recommended.' },
+    { name:'Mohammed Al Mazrouei', time:'3 weeks ago', text:'Very professional and caring team. I appreciated how carefully my treatment was planned and how clearly all the options were explained to me.' },
+    { name:'Hessa Al Marri', time:'2 weeks ago', text:'The clinic provides a calm and comfortable environment. I felt well informed throughout my treatment and was very happy with the overall experience.' }
   ];
   let testimonialIndex = 0;
   const tName = document.getElementById('testimonialName');
