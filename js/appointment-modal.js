@@ -14,6 +14,15 @@
  *
  * Works on pages that don't have a #book-appointment section at all —
  * the popup itself IS the booking form on those pages.
+ *
+ * NOTE: every element this script injects is namespaced with the
+ * "aptPopup..." id prefix (aptPopupForm, aptPopupDate, etc). This is
+ * deliberate — some pages (like the homepage) already have their own
+ * booking form with ids like "appointmentModalForm"/"modalDate". Reusing
+ * those same ids here caused document.getElementById() to grab the
+ * wrong <form> (duplicate ids resolve to whichever one appears first in
+ * the page), which is why submissions were failing on those pages. Keep
+ * these ids unique to this file.
  */
 (function () {
   'use strict';
@@ -73,6 +82,7 @@
     margin-top:14px; padding:12px 16px; border-radius:14px; background:var(--brand-soft, #f3ece3);\
     color:var(--brand-dark, #4a2f1f); font-size:13.5px; font-weight:600; text-align:center;\
   }\
+  .apt-field-hint{display:block; margin-top:6px; font-size:12.5px; color:var(--muted, #8a7768);}\
   @media (max-width:480px){\
     .apt-modal-box{padding:28px 20px 22px; border-radius:20px;}\
   }';
@@ -84,82 +94,167 @@
     document.head.appendChild(style);
   }
 
+  // Google Form this modal submits to, and the entry IDs for each field
+  // (taken from the "Dr-zaheers appointment" Google Form's HTML source).
+  var GOOGLE_FORM_ACTION = 'https://script.google.com/macros/s/AKfycbz-lKzrDF-8r_c-4tD3iHQDFbOdx42YPsmax1w82Qf0cCai4_NC5sc-dh7K1cVSL6em/exec';
+
   var HTML = '' +
-    '<div class="apt-modal-overlay" id="appointmentModalOverlay">' +
-      '<div class="apt-modal-box" role="dialog" aria-modal="true" aria-labelledby="appointmentModalTitle" id="appointmentModalBox">' +
-        '<button type="button" class="apt-modal-close" id="appointmentModalClose" aria-label="Close appointment form">' +
+    '<div class="apt-modal-overlay" id="aptPopupOverlay">' +
+      '<div class="apt-modal-box" role="dialog" aria-modal="true" aria-labelledby="aptPopupTitle" id="aptPopupBox">' +
+        '<button type="button" class="apt-modal-close" id="aptPopupClose" aria-label="Close appointment form">' +
           '<svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>' +
         '</button>' +
         '<div class="apt-modal-head">' +
           '<span class="apt-modal-eyebrow"><span class="line"></span>Book Now</span>' +
-          '<h3 id="appointmentModalTitle">Book an Appointment</h3>' +
+          '<h3 id="aptPopupTitle">Book an Appointment</h3>' +
           '<p>Fill in your details and our team will confirm a time with you shortly.</p>' +
         '</div>' +
-        '<form class="apt-modal-form" id="appointmentModalForm" aria-label="Book an appointment form">' +
-          '<div class="apt-form-row">' +
+        '<form class="apt-modal-form" id="aptPopupForm" aria-label="Book an appointment form" ' +
+              'action="' + GOOGLE_FORM_ACTION + '" method="POST" target="aptHiddenFrame">' +
+          '<div class="apt-form-row" style="margin-bottom: 15px;">' +
             '<div class="apt-field">' +
-              '<label for="modalFullname">Full Name</label>' +
-              '<input id="modalFullname" name="fullname" type="text" placeholder="Your name" autocomplete="name" required>' +
+              '<label for="aptPopupFullname">First Name</label>' +
+              '<input id="aptPopupFullname" name="entry.2070707873" type="text" placeholder="First name" autocomplete="given-name" required>' +
             '</div>' +
             '<div class="apt-field">' +
-              '<label for="modalPhone">Phone Number</label>' +
-              '<input id="modalPhone" name="phone" type="tel" placeholder="+971 5x xxx xxxx" autocomplete="tel" required>' +
+              '<label for="aptPopupLastname">Last Name</label>' +
+              '<input id="aptPopupLastname" name="entry.1107755455" type="text" placeholder="Last name" autocomplete="family-name">' +
+            '</div>' +
+          '</div>' +
+          '<div class="apt-form-row">' +
+			'<div class="apt-field">' +
+              '<label for="aptPopupPhone">Phone Number</label>' +
+              '<input id="aptPopupPhone" name="entry.1895314843" type="tel" placeholder="+971 5x xxx xxxx" autocomplete="tel" required>' +
+            '</div>' +
+            '<div class="apt-field">' +
+              '<label for="aptPopupEmail">Email Address</label>' +
+              '<input id="aptPopupEmail" name="entry.1377789024" type="email" placeholder="you@example.com" autocomplete="email">' +
+            '</div>' +
+          '</div>' +
+          '<div class="apt-form-row">' +
+			'<div class="apt-field">' +
+              '<label for="aptPopupDate">Preferred Date</label>' +
+              '<input id="aptPopupDate" name="modalDateDisplay" type="text" placeholder="Select a date" autocomplete="off" required readonly>' +
+              '<input type="hidden" id="aptPopupDateYear" name="entry.1711041097_year">' +
+              '<input type="hidden" id="aptPopupDateMonth" name="entry.1711041097_month">' +
+              '<input type="hidden" id="aptPopupDateDay" name="entry.1711041097_day">' +
+            '</div>' +
+            '<div class="apt-field">' +
+              '<label for="aptPopupPlace">Place</label>' +
+              '<input id="aptPopupPlace" name="entry.930583085" type="text" placeholder="Your location" autocomplete="off" required>' +
             '</div>' +
           '</div>' +
           '<div class="apt-form-row">' +
             '<div class="apt-field">' +
-              '<label for="modalEmail">Email Address</label>' +
-              '<input id="modalEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email">' +
-            '</div>' +
-            '<div class="apt-field">' +
-              '<label for="modalDate">Preferred Date</label>' +
-              '<input id="modalDate" name="date" type="date">' +
-            '</div>' +
-          '</div>' +
-          '<div class="apt-form-row">' +
-            '<div class="apt-field">' +
-              '<label for="modalTreatment">Treatment</label>' +
-              '<select id="modalTreatment" name="treatment">' +
-                '<option>Consultation</option>' +
-                '<option>Dental Implants</option>' +
-                '<option>Veneers &amp; Smile Design</option>' +
-                '<option>Cleaning, Polishing &amp; Whitening</option>' +
-                '<option>Root Canal Treatment</option>' +
-                '<option>Full Mouth Rehabilitation</option>' +
+              '<label for="aptPopupTreatment">Treatment</label>' +
+              '<select id="aptPopupTreatment" name="entry.735072590" required>' +
+				'<option value="Consultation">Consultation</option>' +
+                '<option value="Dental Implants">Dental Implants</option>' +
+                '<option value="Veneers &amp; Smile Design">Veneers &amp; Smile Design</option>' +
+                '<option value="Cleaning, Polishing &amp; Whitening">Cleaning, Polishing &amp; Whitening</option>' +
+                '<option value="Root Canal Treatment">Root Canal Treatment</option>' +
+                '<option value="Full Mouth Rehabilitation">Full Mouth Rehabilitation</option>' +
+				'<option value="Other">Other</option>' +
               '</select>' +
             '</div>' +
-            '<div class="apt-field">' +
-              '<label for="modalDoctor">Preferred Doctor</label>' +
-              '<select id="modalDoctor" name="doctor">' +
-                '<option>No Preference</option>' +
-                '<option>Dr. Zaher Mine — GP Dentist</option>' +
-                '<option>Dr. Joji Markose — Specialist Prosthodontist / PhD Implantologist</option>' +
+			'<div class="apt-field">' +
+              '<label for="aptPopupDoctor">Preferred Doctor</label>' +
+              '<select id="aptPopupDoctor" name="entry.1550509698" required>' +
+                '<option value="No Preference">No Preference</option>' +
+                '<option value="Dr. Zaher Mine">Dr. Zaher Mine — GP Dentist</option>' +
+                '<option value="Dr. Joji Markose">Dr. Joji Markose — Specialist Prosthodontist / PhD Implantologist</option>' +
               '</select>' +
             '</div>' +
           '</div>' +
           '<div class="apt-form-actions">' +
             '<button type="submit" class="apt-btn-primary">Book an Appointment</button>' +
           '</div>' +
-          '<p class="apt-modal-status" id="appointmentModalStatus" hidden>Thank you! Our team will confirm your appointment shortly.</p>' +
+          '<p class="apt-modal-status" id="aptPopupStatus" hidden>Thank you! Our team will confirm your appointment shortly.</p>' +
         '</form>' +
       '</div>' +
-    '</div>';
+    '</div>' +
+    '<iframe name="aptHiddenFrame" id="aptHiddenFrame" style="display:none" aria-hidden="true" tabindex="-1"></iframe>';
 
   function injectHTML() {
     var wrapper = document.createElement('div');
     wrapper.innerHTML = HTML;
-    document.body.appendChild(wrapper.firstChild);
+    // HTML has two top-level nodes now (the modal overlay + the hidden iframe)
+    while (wrapper.firstChild) {
+      document.body.appendChild(wrapper.firstChild);
+    }
+  }
+
+  // Loads the Flatpickr library (CSS + JS) if it isn't already on the page,
+  // then calls back. Pages like the homepage already load Flatpickr for
+  // their own inline booking form, so this reuses it instead of loading it
+  // twice; other pages get it fetched on demand so the popup stays "drop-in".
+  function loadFlatpickr(callback) {
+    if (window.flatpickr) { callback(); return; }
+
+    if (window.__aptFlatpickrLoading) {
+      document.addEventListener('apt:flatpickr-ready', function ready() {
+        document.removeEventListener('apt:flatpickr-ready', ready);
+        callback();
+      });
+      return;
+    }
+    window.__aptFlatpickrLoading = true;
+
+    if (!document.querySelector('link[href*="flatpickr"]')) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css';
+      document.head.appendChild(link);
+    }
+
+    var script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js';
+    script.onload = function () {
+      document.dispatchEvent(new Event('apt:flatpickr-ready'));
+      callback();
+    };
+    script.onerror = function () {
+      // Offline / blocked — fall back to a plain native date input so
+      // booking still works, just without the Sunday restriction.
+      callback();
+    };
+    document.head.appendChild(script);
+  }
+
+  function setupDatePicker() {
+    var dateInput = document.getElementById('aptPopupDate');
+    if (!dateInput) return;
+
+    if (window.flatpickr) {
+      window.flatpickr(dateInput, {
+        dateFormat: 'Y-m-d',    // value stored/submitted as YYYY-MM-DD
+        altInput: true,         // shows a friendlier display format
+        altFormat: 'D, d M Y',  // e.g. "Mon, 15 Sep 2026"
+        minDate: 'today',
+        disable: [
+          function (date) {
+            return date.getDay() === 0; // 0 = Sunday — disables every Sunday
+          }
+        ]
+      });
+    } else {
+      // Flatpickr failed to load — fall back to a native date picker
+      // (no Sunday restriction, but still usable).
+      dateInput.type = 'date';
+      dateInput.removeAttribute('readonly');
+    }
   }
 
   function init() {
     injectCSS();
     injectHTML();
+    loadFlatpickr(setupDatePicker);
 
-    var overlay = document.getElementById('appointmentModalOverlay');
-    var box = document.getElementById('appointmentModalBox');
-    var closeBtn = document.getElementById('appointmentModalClose');
-    var form = document.getElementById('appointmentModalForm');
-    var status = document.getElementById('appointmentModalStatus');
+    var overlay = document.getElementById('aptPopupOverlay');
+    var box = document.getElementById('aptPopupBox');
+    var closeBtn = document.getElementById('aptPopupClose');
+    var form = document.getElementById('aptPopupForm');
+    var status = document.getElementById('aptPopupStatus');
     var lastFocused = null;
 
     function openModal(e) {
@@ -196,10 +291,25 @@
       if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
     });
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    var dateInput = document.getElementById('aptPopupDate');
+
+    form.addEventListener('submit', function () {
+      // Google's date field expects separate year/month/day params, so split
+      // the native <input type="date"> value (YYYY-MM-DD) into the three
+      // hidden inputs right before the form actually posts.
+      if (dateInput && dateInput.value) {
+        var parts = dateInput.value.split('-');
+        document.getElementById('aptPopupDateYear').value = parts[0] || '';
+        document.getElementById('aptPopupDateMonth').value = parts[1] || '';
+        document.getElementById('aptPopupDateDay').value = parts[2] || '';
+      }
+      // Do NOT preventDefault: the form's action/method/target post the data
+      // to the Google Form in the background via the hidden iframe, so the
+      // page never navigates away. We just show the confirmation and reset.
       status.hidden = false;
-      form.reset();
+      window.setTimeout(function () {
+        form.reset();
+      }, 300);
     });
 
     // expose a manual trigger, e.g. onclick="window.openAppointmentModal()"
