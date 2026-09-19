@@ -30,6 +30,9 @@
   .row.g-4 > [class*="col-"] { padding: 0 14px; margin-bottom: 28px; }
   .col-lg-5 { flex: 0 0 100%; max-width: 100%; }
   .col-lg-7 { flex: 0 0 100%; max-width: 100%; }
+  .cr-entry h6 {
+    text-transform: capitalize;
+}
   @media (min-width: 992px) {
     .col-lg-5 { flex: 0 0 41.6667%; max-width: 41.6667%; }
     .col-lg-7 { flex: 0 0 58.3333%; max-width: 58.3333%; }
@@ -317,7 +320,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
 
 <script>
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwqe5LC37sC_XXf0cImNf19VnEtg80AzbpLCw2gx0Zjq4fFokkN7ilCI4MR0Sq5Cg9h/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxfqbSJQ8EiZmyb41qwZxuioTXQ3mFbd3FA4I-7OMwy9CI_jpl43GhTGKZVXgWIbVnN/exec';
 
 (function () {
   const statusEl = document.getElementById('status');
@@ -381,12 +384,12 @@ const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwqe5LC37sC_XXf0cIm
       const entry = document.createElement('div');
       entry.className = 'cr-entry';
       entry.innerHTML = `
-        <h6>${escapeHtml(row.fullName || 'Unnamed')}</h6>
+        <h6>${escapeHtml(row.firstName || 'Unnamed')}${row.lastName ? ' ' + escapeHtml(row.lastName) : ''}</h6>
         <div class="cr-row"><span class="cr-label">Phone:</span><span>${escapeHtml(row.phoneNumber || '-')}</span></div>
         <div class="cr-row"><span class="cr-label">Email:</span><span>${escapeHtml(row.emailAddress || '-')}</span></div>
         <div class="cr-row"><span class="cr-label">Treatment:</span><span>${escapeHtml(row.treatment || '-')}</span></div>
         <div class="cr-row"><span class="cr-label">Doctor:</span><span>${escapeHtml(row.preferredDoctor || '-')}</span></div>
-        <div class="cr-row"><span class="cr-label">Submitted:</span><span>${escapeHtml(row.timestamp || '-')}</span></div>
+        <div class="cr-row"><span class="cr-label">Submitted:</span><span>${escapeHtml(row.dateKey || '-')}</span></div>
       `;
       resultsEl.appendChild(entry);
     });

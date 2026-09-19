@@ -1,4 +1,4 @@
-  // header scroll shadow
+// header scroll shadow
   const header = document.getElementById('site-header');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 10);
@@ -204,7 +204,7 @@
    */
 
   const googleFormURL =
-    'https://script.google.com/macros/s/AKfycbz-lKzrDF-8r_c-4tD3iHQDFbOdx42YPsmax1w82Qf0cCai4_NC5sc-dh7K1cVSL6em/exec';
+    'https://docs.google.com/forms/u/0/d/e/1FAIpQLScauGVV-Lam5UfTCucb4tVY7LpdPBc3hmUTsRogdD-u-P2lHQ/formResponse';
 
 
   /*
@@ -213,21 +213,31 @@
    * ============================================================
    */
 
-  const dateYear = document.createElement('input');
-  dateYear.type = 'hidden';
-  dateYear.name = 'entry.1711041097_year';
+  /*
+   * getOrCreateHidden() reuses an existing hidden input with this
+   * name if one is already in the form (e.g. left over in the HTML,
+   * or added by another script) instead of creating a second one.
+   * Having two inputs with the same "name" is what was causing the
+   * date fields to submit empty/blank to the Google Sheet.
+   */
 
-  const dateMonth = document.createElement('input');
-  dateMonth.type = 'hidden';
-  dateMonth.name = 'entry.1711041097_month';
+  function getOrCreateHidden(name) {
 
-  const dateDay = document.createElement('input');
-  dateDay.type = 'hidden';
-  dateDay.name = 'entry.1711041097_day';
+    let field = form.querySelector('input[name="' + name + '"]');
 
-  form.appendChild(dateYear);
-  form.appendChild(dateMonth);
-  form.appendChild(dateDay);
+    if (!field) {
+      field = document.createElement('input');
+      field.type = 'hidden';
+      field.name = name;
+      form.appendChild(field);
+    }
+
+    return field;
+  }
+
+  const dateYear = getOrCreateHidden('entry.1711041097_year');
+  const dateMonth = getOrCreateHidden('entry.1711041097_month');
+  const dateDay = getOrCreateHidden('entry.1711041097_day');
 
 
   /*
@@ -472,6 +482,20 @@
      */
 
     formData.delete('date');
+
+
+    /*
+     * Debug log: with mode "no-cors" the browser hides the real
+     * response from JS (that's required for this cross-origin
+     * request to work at all), so this is the only way to confirm
+     * from the console what is actually being sent. Check the
+     * Network tab for the request to googleFormURL to see if it
+     * fires, and check the Apps Script "Executions" log to see if
+     * it actually arrived server-side.
+     */
+
+    console.log('Submitting appointment form. Payload:',
+      Object.fromEntries(formData.entries()));
 
 
     /*

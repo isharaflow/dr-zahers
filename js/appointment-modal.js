@@ -96,7 +96,7 @@
 
   // Google Form this modal submits to, and the entry IDs for each field
   // (taken from the "Dr-zaheers appointment" Google Form's HTML source).
-  var GOOGLE_FORM_ACTION = 'https://script.google.com/macros/s/AKfycbz-lKzrDF-8r_c-4tD3iHQDFbOdx42YPsmax1w82Qf0cCai4_NC5sc-dh7K1cVSL6em/exec';
+  var GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScauGVV-Lam5UfTCucb4tVY7LpdPBc3hmUTsRogdD-u-P2lHQ/formResponse';
 
   var HTML = '' +
     '<div class="apt-modal-overlay" id="aptPopupOverlay">' +
@@ -328,6 +328,14 @@
 
   function autoOpenOnFirstVisit(openModal) {
     if (!isHomepage()) return;
+
+    // Don't auto-open this popup on pages that already have their own
+    // inline booking form (like the homepage's #appointmentModalForm
+    // section) — surprising a visitor with a second, separate form is
+    // how you end up with two independent submissions (and two emails)
+    // for what felt like one booking. The popup can still be opened
+    // manually via a "Book Appointment" link/button on such pages.
+    if (document.getElementById('appointmentModalForm')) return;
 
     var alreadySeen;
     try {
