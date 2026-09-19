@@ -533,74 +533,70 @@
         <li><span class="check-dot"><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg></span>No Obligation to Proceed</li>
       </ul>
     </div>
-<form class="apt-modal-form" id="appointmentModalForm" aria-label="Book an appointment form">
-  <div class="apt-form-row">
-    <div class="apt-field">
-      <label for="modalFullname">First Name</label>
-      <input id="modalFullname" name="entry.2070707873" type="text" placeholder="First name" autocomplete="given-name" required="" class="is-invalid">
-    </div>
-    <div class="apt-field">
-      <label for="modalLastname">Last Name</label>
-      <input id="modalLastname" name="entry.1107755455" type="text" placeholder="Last name" autocomplete="family-name">
-    </div>
-  </div>
-  <div class="apt-form-row">
-    <div class="apt-field">
-      <label for="modalPhone">Phone Number</label>
-      <input id="modalPhone" name="entry.1895314843" type="tel" placeholder="+971 5x xxx xxxx" autocomplete="tel" required="">
-    </div>
-	<div class="apt-field">
-      <label for="modalEmail">Email Address</label>
-      <input id="modalEmail" name="entry.1377789024" type="email" placeholder="you@example.com" autocomplete="email">
-    </div>
-  </div>
+	<form class="apt-modal-form" id="appointmentModalForm" aria-label="Book an appointment form">
+	  <div class="apt-form-row">
+		<div class="apt-field">
+		  <label for="modalFullname">First Name</label>
+		  <input id="modalFullname" name="entry.2070707873" type="text" placeholder="First name" autocomplete="given-name" required="" class="is-invalid">
+		</div>
+		<div class="apt-field">
+		  <label for="modalLastname">Last Name</label>
+		  <input id="modalLastname" name="entry.1107755455" type="text" placeholder="Last name" autocomplete="family-name">
+		</div>
+	  </div>
+	  <div class="apt-form-row">
+		<div class="apt-field">
+		  <label for="modalPhone">Phone Number</label>
+		  <input id="modalPhone" name="entry.1895314843" type="tel" placeholder="+971 5x xxx xxxx" autocomplete="tel" required="">
+		</div>
+		<div class="apt-field">
+		  <label for="modalEmail">Email Address</label>
+		  <input id="modalEmail" name="entry.1377789024" type="email" placeholder="you@example.com" autocomplete="email">
+		</div>
+	  </div>
 
-  <div class="apt-form-row">
-    
-    <div class="apt-field">
-      <label for="modalDate">Preferred Date</label>
-      <input id="modalDate" name="date" type="text" placeholder="Select a date" autocomplete="off" required="" readonly="readonly" class="flatpickr-input">
-      <!-- <small class="apt-field-hint">We're closed on Sundays.</small> -->
-    </div>
-    <div class="apt-field">
-      <label for="modalPlace">Place</label>
-      <input id="modalPlace" name="entry.930583085" type="text" placeholder="Your location" autocomplete="off" required="">
-    </div>
-  </div>
-  <div class="apt-form-row">
-	 <div class="apt-field">
-		  <label for="modalTreatment">Treatment</label>
-		  <select id="modalTreatment" name="entry.735072590" required="">
-			<option value="Consultation">Consultation</option>
-			<option value="Dental Implants">Dental Implants</option>
-			<option value="Veneers &amp; Smile Design">Veneers &amp; Smile Design</option>
-			<option value="Cleaning, Polishing &amp; Whitening">Cleaning, Polishing &amp; Whitening</option>
-			<option value="Root Canal Treatment">Root Canal Treatment</option>
-			<option value="Full Mouth Rehabilitation">Full Mouth Rehabilitation</option>
-			<option value="Other">Other</option>
+	  <div class="apt-form-row">
+		
+		<div class="apt-field">
+		  <label for="modalDate">Preferred Date</label>
+		  <input id="modalDate" name="date" type="text" placeholder="Select a date" autocomplete="off" required="" readonly="readonly" class="flatpickr-input">
+		  <!-- <small class="apt-field-hint">We're closed on Sundays.</small> -->
+		</div>
+		<div class="apt-field">
+		  <label for="modalPlace">Place</label>
+		  <input id="modalPlace" name="entry.930583085" type="text" placeholder="Your location" autocomplete="off" required="">
+		</div>
+	  </div>
+	  <div class="apt-form-row">
+		 <div class="apt-field">
+			  <label for="modalTreatment">Treatment</label>
+			  <select id="modalTreatment" name="entry.735072590" required="">
+				<option value="Consultation">Consultation</option>
+				<option value="Dental Implants">Dental Implants</option>
+				<option value="Veneers &amp; Smile Design">Veneers &amp; Smile Design</option>
+				<option value="Cleaning, Polishing &amp; Whitening">Cleaning, Polishing &amp; Whitening</option>
+				<option value="Root Canal Treatment">Root Canal Treatment</option>
+				<option value="Full Mouth Rehabilitation">Full Mouth Rehabilitation</option>
+				<option value="Other">Other</option>
+			  </select>
+			</div>
+		<div class="apt-field">
+		  <label for="modalDoctor">Preferred Doctor</label>
+		  <select id="modalDoctor" name="entry.1550509698" required="">
+			<option value="No Preference">No Preference</option>
+			<option value="Dr. Zaher Mine">Dr. Zaher Mine</option>
+			<option value="Dr. Joji Markose">Dr. Joji Markose</option>
 		  </select>
 		</div>
-    <div class="apt-field">
-      <label for="modalDoctor">Preferred Doctor</label>
-      <select id="modalDoctor" name="entry.1550509698" required="">
-        <option value="No Preference">No Preference</option>
-        <option value="Dr. Zaher Mine">Dr. Zaher Mine — GP Dentist</option>
-        <option value="Dr. Joji Markose">Dr. Joji Markose — Specialist Prosthodontist / PhD Implantologist</option>
-      </select>
-    </div>
-  </div>
+	  </div>
 
-  <div class="apt-form-actions">
-    <button type="submit" class="apt-btn-primary">Book an Appointment</button>
-  </div>
-  <p class="apt-modal-status" id="appointmentModalStatus" hidden="">Thank you! Our team will confirm your appointment shortly.</p>
-<input type="hidden" name="entry.1711041097_year"><input type="hidden" name="entry.1711041097_month"><input type="hidden" name="entry.1711041097_day"></form>
+	  <div class="apt-form-actions">
+		<button type="submit" class="apt-btn-primary">Book an Appointment</button>
+	  </div>
+	  <p class="apt-modal-status" id="appointmentModalStatus" hidden="">Thank you! Our team will confirm your appointment shortly.</p>
+	</form>
 
-<iframe name="hidden_google_form_iframe" id="hidden_google_form_iframe" style="display:none;"></iframe>
-
-
-
-
+	<iframe name="hidden_google_form_iframe" id="hidden_google_form_iframe" style="display:none;"></iframe>
   </div>
 </section>
 <!-- ================= LOCATION ================= -->
