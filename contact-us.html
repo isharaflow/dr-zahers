@@ -93,7 +93,7 @@
 <!-- ================= HEADER ================= -->
 <header id="site-header">
   <div class="nav-inner">
-    <a href="#home" class="logo">
+    <a href="index.html" class="logo">
       <img src="img/dr-zahers-logo.png" alt="Dr. Zahers Aesthetic Dental Center - Dentist in Al Jurf, Ajman" width="150" height="40">
     </a>
     <nav class="main-nav" aria-label="Primary">
@@ -169,196 +169,97 @@
     </div>
   </div>
 </section>
-<!-- ================= BOOK AN APPOINTMENT ================= --><section id="contact-form" class="booking-section reveal">
-  <div class="wrap booking-grid">
+<!-- ================= CONTACT US / FIND US ================= -->
+<style>
+  .cfu-section .wrap{max-width:1200px;}
+  .cfu-header{max-width:640px;margin:0 auto 44px;text-align:center;}
+  .cfu-header .eyebrow{justify-content:center;}
+  .cfu-header .section-desc{margin-left:auto;margin-right:auto;}
 
-    <!-- Contact Information -->
-    <div class="booking-info">
-      <span class="eyebrow">
-        <span class="line"></span>CONTACT US
-      </span>
+  .cfu-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:28px;align-items:start;}
 
-      <h2 class="section-title">
-        How Can We <span>Help You?</span>
-      </h2>
+  .cfu-photo{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.14);}
+  .cfu-photo img{width:100%;height:100%;aspect-ratio:4/4;object-fit:cover;display:block;}
+  .cfu-nap{position:absolute;left:20px;right:20px;bottom:20px;background:#ffffffde;border-radius:14px;
+    padding:22px 26px;display:flex;flex-wrap:wrap;gap:20px 28px;box-shadow:0 10px 28px rgba(0,0,0,.18);}
+  .cfu-nap-item{display:flex;gap:12px;align-items:flex-start;flex:1 1 220px;}
+  .cfu-nap-item + .cfu-nap-item{border-left:1px solid rgba(0,0,0,.1);padding-left:24px;}
+  .cfu-nap-item svg{flex-shrink:0;width:20px;height:20px;margin-top:2px;color:var(--brand-ink,#4a2f1f);}
+  .cfu-nap-item b{display:block;color:var(--brand-ink,#4a2f1f);font-size:15px;margin-bottom:4px;}
+  .cfu-nap-item span{display:block;color:var(--brand-ink,#4a2f1f);font-size:14px;line-height:1.5;}
+  .cfu-nap-item a{color:var(--brand-ink,#4a2f1f);font-weight:700;text-decoration:none;}
+  .cfu-nap-item a:hover{text-decoration:underline;}
 
-      <p class="section-desc">
-        Have a question about our dental services or treatment options?
-        Send us your enquiry and our team will get back to you as soon as possible.
-      </p>
+  .cfu-side{display:flex;flex-direction:column;gap:20px;}
+  .cfu-side .map-frame{border-radius:16px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.1);}
+  .cfu-side .map-frame iframe{width:100%;border:0;display:block;}
 
-      <div class="nap">
-        <b>Dr. Zahers Aesthetic Dental Center</b>
-        Room No. 307, Khalifa Building<br>
-        Near Ajman Court, Al Jurf, Ajman &ndash; U.A.E.<br><br>
+  .cfu-findus{background:var(--brand-ink,#4a2f1f);color:#fff;border-radius:16px;padding:28px 30px;}
+  .cfu-findus svg{width:22px;height:22px;margin-bottom:12px;color:#fff;}
+  .cfu-findus h3{margin:0 0 10px;font-size:20px;font-weight:800;color:#fff;}
+  .cfu-findus p{margin:0;line-height:1.65;color:rgba(255,255,255,.88);font-size:14.5px;}
 
-        Tel:
-        <a href="tel:+97167161982">+971 6 716 1982</a>
-        &middot;
-        <a href="tel:+971509868986">+971 50 986 8986</a><br>
+  .cfu-directions{align-self:flex-start;}
 
-        Email:
-        <a href="mailto:info@drzahersdental.com">
-          info@drzahersdental.com
-        </a>
-      </div>
+  @media (max-width:860px){
+    .cfu-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:560px){
+    .cfu-nap{position:static;margin-top:14px;box-shadow:0 6px 18px rgba(0,0,0,.1);}
+    .cfu-nap-item + .cfu-nap-item{border-left:0;padding-left:0;border-top:1px solid rgba(0,0,0,.1);padding-top:14px;}
+    .cfu-photo{padding-bottom:0;}
+  }
+</style>
+<section id="contact-form" class="booking-section reveal cfu-section">
+  <div class="wrap">
+
+    <div class="cfu-header">
+      <span class="eyebrow"><span class="line"></span>CONTACT US</span>
+      <h2 class="section-title">How Can We <span>Help You?</span></h2>
+      <p class="section-desc">Have a question about our dental services or treatment options? Send us your enquiry and our team will get back to you as soon as possible.</p>
     </div>
 
+    <div class="cfu-grid">
 
-    <!-- Contact / Enquiry Form 
-    <form
-      class="booking-form"
-      onsubmit="event.preventDefault(); alert('Thank you! Your enquiry has been received. Our team will contact you shortly.');"
-      aria-label="Contact enquiry form"
-    >
+      <!-- Building photo with NAP overlay -->
+      <div class="cfu-photo">
+        <img src="img/dr-zaheers-ajman-building.png" alt="Khalifa Building in Al Jurf, Ajman - exterior of the building housing Dr. Zahers Aesthetic Dental Center" loading="lazy" decoding="async">
+        <div class="cfu-nap">
+          <div class="cfu-nap-item">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <b>Dr. Zahers Aesthetic Dental Center</b>
+              <span>Room No. 307, Khalifa Building<br>Near Ajman Court, Al Jurf, Ajman &ndash; U.A.E.</span>
+            </div>
+          </div>
+          <div class="cfu-nap-item">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+            <div>
+              <span>Tel: <a href="tel:+97167161982">+971 6 716 1982</a><br><a href="tel:+971509868986">+971 50 986 8986</a></span>
+              <span style="margin-top:6px;">Email: <a href="mailto:info@drzahersdental.com">info@drzahersdental.com</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h3 style="font-size:19px; font-weight:800; color:var(--brand-ink); margin-bottom:20px;">
-        Contact Our Team
-      </h3>
-
-     
-      <div class="form-row">
-
-        <div class="field">
-          <label for="fullname">Full Name</label>
-          <input
-            id="fullname"
-            name="fullname"
-            type="text"
-            placeholder="Enter your full name"
-            autocomplete="name"
-            required
-          >
+      <!-- Map + Find Us -->
+      <div class="cfu-side">
+        <div class="map-frame">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d225.2441984509579!2d55.51129755337301!3d25.407917589332946!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef5f7e7d5c25f1d%3A0xc168e7087d9230da!2sDr%20Zahers%20Aesthetic%20Dental%20Center!5e0!3m2!1sen!2sin!4v1789751567699!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing Dr. Zahers Aesthetic Dental Center, dentist near Ajman Court, Al Jurf, Ajman"></iframe>
         </div>
 
-        <div class="field">
-          <label for="phone">Phone Number</label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            placeholder="Enter your phone number"
-            autocomplete="tel"
-            required
-          >
+        <div class="cfu-findus">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+          <h3>Find Us</h3>
+          <p>Conveniently located near Ajman Court in Al Jurf, Ajman, our centre is easily accessible from Al Jurf, Al Nuainiya, central Ajman, and nearby areas of Sharjah.</p>
         </div>
 
+        <a href="https://maps.app.goo.gl/6bFMospMetFHNs7y9" target="_blank" rel="noopener" class="btn btn-primary cfu-directions">Get Directions &rarr;</a>
       </div>
 
-
-      
-      <div class="form-row">
-
-        <div class="field">
-          <label for="email">Email Address</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Enter your email address"
-            autocomplete="email"
-          >
-        </div>
-
-        <div class="field">
-          <label for="enquiry">Enquiry Type</label>
-
-          <select id="enquiry" name="enquiry" onchange="showEnquiryOptions()">
-            <option value="">Select an enquiry type</option>
-            <option value="general">General Enquiry</option>
-            <option value="implants">Dental Implants</option>
-            <option value="veneers">Veneers &amp; Smile Design</option>
-            <option value="rehabilitation">Full Mouth Rehabilitation</option>
-            <option value="root-canal">Root Canal Treatment</option>
-            <option value="cleaning">Cleaning, Polishing &amp; Whitening</option>
-            <option value="extraction">Surgical Extractions</option>
-            <option value="other">Other</option>
-          </select>
-
-        </div>
-
-      </div>
-
-
-      <div
-        class="field"
-        id="dynamicEnquiry"
-        style="display:none; margin-bottom:16px;"
-      >
-
-        <label for="enquiryDetails" id="dynamicLabel">
-          Treatment Details
-        </label>
-
-        <select id="enquiryDetails" name="enquiry_details">
-          <option value="">Select an option</option>
-        </select>
-
-      </div>
-
-
-      
-      <div class="field" style="margin-bottom:20px;">
-
-        <label for="message">Message</label>
-
-        <textarea
-          id="message"
-          name="message"
-          placeholder="Tell us how we can help you..."
-          rows="5"
-        ></textarea>
-
-      </div>
-
-
-      
-      <div class="form-actions">
-
-        <button type="submit" class="btn btn-primary">
-          Send Enquiry
-          <svg class="icon" viewBox="0 0 24 24">
-            <path d="M5 12h14"></path>
-            <path d="m12 5 7 7-7 7"></path>
-          </svg>
-        </button>
-
-      </div>
-
-      <p style="margin-top:14px; font-size:13px; line-height:1.6; color:var(--muted);">
-        Our team will review your enquiry and get back to you as soon as possible.
-      </p>
-
-    </form> -->
-<div class="map-frame">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d225.2441984509579!2d55.51129755337301!3d25.407917589332946!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef5f7e7d5c25f1d%3A0xc168e7087d9230da!2sDr%20Zahers%20Aesthetic%20Dental%20Center!5e0!3m2!1sen!2sin!4v1789751567699!5m2!1sen!2sin"  loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing Dr. Zahers Aesthetic Dental Center, dentist near Ajman Court, Al Jurf, Ajman"></iframe>
     </div>
   </div>
 </section>
-
-
-<!-- ================= LOCATION ================= 
-<section id="location" class="reveal">
-  <div class="wrap location-grid">
-    <div>
-      <span class="eyebrow"><span class="line"></span>FIND US</span>
-      <h2 class="section-title">Dental Centre Near<span>Ajman Court, Al Jurf</span></h2>
-      <p class="section-desc">Our centre is conveniently located in Khalifa Building, near Ajman Court in Al Jurf, Ajman. The location offers easy access from Al Jurf, Al Nuaimiya, central Ajman, and nearby areas of Sharjah.</p>
-      <div class="hours-card">
-        <h3>Dr. Zahers Aesthetic Dental Center</h3>
-        <ul>
-          <li><span>Room No. 307, Khalifa Building</span></li>
-          <li><span>Near Ajman Court, Al Jurf</span></li>
-          <li><span>Ajman &ndash; U.A.E.</span></li>
-        </ul>
-      </div>
-      <a href="https://maps.app.goo.gl/6bFMospMetFHNs7y9" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:24px;">Get Directions</a>
-    </div>
-    <div class="map-frame">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d225.2441984509579!2d55.51129755337301!3d25.407917589332946!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef5f7e7d5c25f1d%3A0xc168e7087d9230da!2sDr%20Zahers%20Aesthetic%20Dental%20Center!5e0!3m2!1sen!2sin!4v1789751567699!5m2!1sen!2sin"  loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing Dr. Zahers Aesthetic Dental Center, dentist near Ajman Court, Al Jurf, Ajman"></iframe>
-    </div>
-  </div>
-</section> -->
 
 <!-- ================= HAVE QUESTIONS ================= -->
 <section class="reveal">
@@ -392,7 +293,7 @@
       <ul>
         <li><a href="index.html">Home</a></li><li><a href="about-us.html">About Us</a></li>
         <li><a href="#our-services">Services</a></li><li><a href="about-us.html#our-specialists">Our Specialists</a></li>
-        <li><a href="faqs.html">FAQ</a></li><li><a href="contact-us.html#location">Location</a></li><li><a href="contact-us.html">Contact</a></li>
+        <li><a href="faqs.html">FAQ</a></li><li><a href="contact-us.html#contact-form">Location</a></li><li><a href="contact-us.html">Contact</a></li>
       </ul>
     </div>
     <div>
