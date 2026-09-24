@@ -109,8 +109,44 @@
     color: var(--brand-dark, #4a2f1f);
     border-color: rgba(74,47,31,0.25);
   }
-  .cr-btn-outline:hover { background: rgba(74,47,31,0.06); }
+  .cr-btn-outline:hover { background: rgb(141 111 94); }
   .cr-btn-outline:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .cr-actions-secondary { margin-top: 10px; }
+  .cr-btn-icon { width: 15px; height: 15px; flex: none; vertical-align: -2px; margin-right: 6px; }
+  .cr-btn-danger {
+    background: transparent;
+    color: #b3261e;
+    border-color: rgba(179,38,30,0.35);
+  }
+  .cr-btn-danger:hover { background: rgba(179,38,30,0.08); }
+  .cr-btn-danger:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ---- Clear-history confirmation modal ---- */
+  .cr-modal-overlay {
+    position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center;
+    padding: 20px; background: rgba(42,24,16,.55); backdrop-filter: blur(3px);
+    opacity: 0; visibility: hidden; transition: opacity .22s ease, visibility .22s ease;
+    font-family: inherit;
+  }
+  .cr-modal-overlay.open { opacity: 1; visibility: visible; }
+  body.cr-modal-open { overflow: hidden; }
+  .cr-modal-box {
+    position: relative; width: 100%; max-width: 420px; background: #fff;
+    border-radius: var(--radius-lg, 20px); box-shadow: var(--shadow-float, 0 25px 60px -20px rgba(20,22,60,.35));
+    padding: 28px 26px 24px; box-sizing: border-box;
+    transform: translateY(16px) scale(.97); opacity: 0;
+    transition: transform .26s cubic-bezier(.2,.8,.2,1), opacity .22s ease;
+  }
+  .cr-modal-overlay.open .cr-modal-box { transform: translateY(0) scale(1); opacity: 1; }
+  .cr-modal-box h4 { margin: 0 0 10px; font-size: 1.15rem; font-weight: 700; color: var(--brand-dark, #4a2f1f); }
+  .cr-modal-box p { margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--text-muted, #6b5d54); }
+  .cr-modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; }
+  .cr-modal-actions .cr-btn { padding: 9px 20px; }
+  .cr-modal-btn-confirm {
+    background: #b3261e; color: #fff; border-color: #b3261e;
+  }
+  .cr-modal-btn-confirm:hover { background: #8f1e18; }
 
   .cr-status { margin: 16px 0 0; font-size: 0.85rem; color: var(--text-muted, #6b5d54); }
   .cr-status.is-error { color: #b3261e; }
@@ -215,6 +251,20 @@
 			  <div class="cr-actions">
 				<button id="todayBtn" class="cr-btn cr-btn-outline">Today</button>
 				<button id="refreshBtn" class="cr-btn cr-btn-outline">Refresh data</button>
+			  </div>
+			  <div class="cr-actions cr-actions-secondary">
+				<button id="downloadXlsxBtn" class="cr-btn cr-btn-outline">
+				  <svg class="cr-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+				  Download .xlsx
+				</button>
+				<a href="https://docs.google.com/spreadsheets/d/1Y73fOSYy5bL7YJRet44zPhuZAxvFLVS7_zZbZTwodCI/edit?usp=drive_web&ouid=116730595428957275794" target="_blank" class="cr-btn cr-btn-outline">
+				  <svg class="cr-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+				  Open Google Sheet
+				</a>
+				<!-- <button id="clearHistoryBtn" class="cr-btn cr-btn-danger">
+				  <svg class="cr-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+				  Clear history
+				</button> -->
 			  </div>
 			  <p class="cr-status" id="status">Loading data…</p>
 			</div>
@@ -322,8 +372,29 @@
 <!-- Flatpickr JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
 
+<!-- SheetJS (used by the "Download .xlsx" button) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<!-- Clear-history confirmation popup (disabled)
+<div class="cr-modal-overlay" id="clearModal" role="dialog" aria-modal="true" aria-labelledby="clearModalTitle" aria-hidden="true">
+  <div class="cr-modal-box">
+    <h4 id="clearModalTitle">Clear all booking history?</h4>
+    <p>This will permanently delete <strong>all</strong> consultation requests from the Google Sheet. This action cannot be undone. Tip: use "Download .xlsx" first if you want a backup.</p>
+    <div class="cr-modal-actions">
+      <button type="button" class="cr-btn cr-btn-outline" id="clearCancelBtn">Cancel</button>
+      <button type="button" class="cr-btn cr-modal-btn-confirm" id="clearConfirmBtn">Yes, clear history</button>
+    </div>
+  </div>
+</div>
+-->
+
 <script>
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxfqbSJQ8EiZmyb41qwZxuioTXQ3mFbd3FA4I-7OMwy9CI_jpl43GhTGKZVXgWIbVnN/exec';
+
+// Paste the full URL of the Google Sheet that stores the bookings
+// (e.g. https://docs.google.com/spreadsheets/d/XXXXXXXX/edit).
+// If left empty, the page uses the "sheetUrl" returned by the Apps Script (see notes).
+const SHEET_URL = '';
 
 (function () {
   const statusEl = document.getElementById('status');
@@ -336,6 +407,7 @@ const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxfqbSJQ8EiZmyb41qw
   let groupedByDate = {};
   let datesWithData = [];
   let flatpickrInstance = null;
+  let sheetUrlFromApi = '';
 
   function todayIso() {
     return new Date().toISOString().slice(0, 10);
@@ -433,6 +505,7 @@ const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxfqbSJQ8EiZmyb41qw
       if (!json.success) throw new Error(json.error || 'Unknown error from web app');
 
       allRows = json.data || [];
+      sheetUrlFromApi = json.sheetUrl || '';
       groupedByDate = groupByDate(allRows);
       datesWithData = fetchSubmittedDates(allRows);
 
@@ -456,6 +529,87 @@ const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxfqbSJQ8EiZmyb41qw
     });
 
     document.getElementById('refreshBtn').addEventListener('click', loadData);
+
+    /* ---------- 1. Download booking records as .xlsx ---------- */
+    document.getElementById('downloadXlsxBtn').addEventListener('click', function () {
+      if (typeof XLSX === 'undefined') {
+        statusEl.textContent = 'Excel library failed to load. Check your internet connection and reload the page.';
+        return;
+      }
+      if (!allRows.length) {
+        statusEl.textContent = 'There are no booking records to download.';
+        return;
+      }
+      const data = allRows.map(function (r) {
+        return {
+          'Date': r.dateKey && r.dateKey !== 'unknown' ? formatDisplayDate(r.dateKey) : '',
+          'First Name': r.firstName || '',
+          'Last Name': r.lastName || '',
+          'Phone': r.phoneNumber || '',
+          'Email': r.emailAddress || '',
+          'Treatment': r.treatment || '',
+          'Preferred Doctor': r.preferredDoctor || ''
+        };
+      });
+      const ws = XLSX.utils.json_to_sheet(data);
+      ws['!cols'] = [{wch:12},{wch:16},{wch:16},{wch:16},{wch:28},{wch:26},{wch:22}];
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Bookings');
+      XLSX.writeFile(wb, 'booking-records-' + todayIso() + '.xlsx');
+      statusEl.classList.remove('is-error');
+      statusEl.textContent = 'Downloaded ' + data.length + ' record' + (data.length === 1 ? '' : 's') + '.';
+    });
+
+    // /* ---------- 3. Clear history (with confirmation popup) ---------- */
+    // const clearBtn = document.getElementById('clearHistoryBtn');
+    // const clearModal = document.getElementById('clearModal');
+    // const clearConfirmBtn = document.getElementById('clearConfirmBtn');
+    // const clearCancelBtn = document.getElementById('clearCancelBtn');
+
+    // function openClearModal() {
+    //   clearModal.classList.add('open');
+    //   clearModal.setAttribute('aria-hidden', 'false');
+    //   document.body.classList.add('cr-modal-open');
+    //   clearCancelBtn.focus();
+    // }
+    // function closeClearModal() {
+    //   clearModal.classList.remove('open');
+    //   clearModal.setAttribute('aria-hidden', 'true');
+    //   document.body.classList.remove('cr-modal-open');
+    // }
+
+    // clearBtn.addEventListener('click', openClearModal);
+    // clearCancelBtn.addEventListener('click', closeClearModal);
+    // clearModal.addEventListener('click', function (e) { if (e.target === clearModal) closeClearModal(); });
+    // document.addEventListener('keydown', function (e) {
+    //   if (e.key === 'Escape' && clearModal.classList.contains('open')) closeClearModal();
+    // });
+
+    // clearConfirmBtn.addEventListener('click', async function () {
+    //   clearConfirmBtn.disabled = true;
+    //   clearConfirmBtn.textContent = 'Clearing…';
+    //   try {
+    //     // text/plain avoids a CORS preflight, which Apps Script web apps don't support
+    //     const res = await fetch(WEB_APP_URL, {
+    //       method: 'POST',
+    //       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    //       body: JSON.stringify({ action: 'clearHistory' })
+    //     });
+    //     const json = await res.json();
+    //     if (!json.success) throw new Error(json.error || 'Apps Script did not confirm the deletion');
+    //     closeClearModal();
+    //     await loadData();
+    //     statusEl.classList.remove('is-error');
+    //     statusEl.textContent = 'Booking history cleared.';
+    //   } catch (err) {
+    //     closeClearModal();
+    //     statusEl.classList.add('is-error');
+    //     statusEl.textContent = 'Could not clear history: ' + err.message;
+    //   } finally {
+    //     clearConfirmBtn.disabled = false;
+    //     clearConfirmBtn.textContent = 'Yes, clear history';
+    //   }
+    // });
 
     loadData();
   });
