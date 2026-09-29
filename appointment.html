@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appointment | Dr. Zahers Aesthetic Dental Center, Al Jurf Ajman</title>
+<meta name="description" content="Book an appointment at Dr. Zahers Aesthetic Dental Center in Al Jurf, Ajman. Choose your treatment, preferred doctor and date, and our team will confirm your visit.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#4a2f1f">
+<link rel="canonical" href="https://www.drzahersdental.com/appointment.html">
+<link rel="icon" href="img/favicon.png" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+<link rel="stylesheet" href="css/styles.css">
+
+<style>
+  .appt-hero{padding-bottom:36px;}
+  .appt-hero .hero-sub{max-width:520px;margin:16px auto 0;}
+  .appt-section{padding:0 0 80px;background:var(--surface-tint);}
+  .appt-card{max-width:720px;margin:0 auto;}
+  .appt-card .booking-form{padding:36px 32px;}
+  .appt-card .field input,
+  .appt-card .field select,
+  .appt-card .flatpickr-input + input{
+    width:100%;height:48px;border-radius:12px;border:1px solid var(--border);
+    background:#fdfbf8;padding:0 14px;font:inherit;font-size:15px;color:var(--brand-ink);
+  }
+  .appt-card .field select{appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b4530' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;background-size:16px;}
+  .appt-card .field input:focus-visible,
+  .appt-card .field select:focus-visible,
+  .appt-card .flatpickr-input + input:focus-visible{outline:2px solid var(--brand);outline-offset:1px;border-color:var(--brand);}
+  .appt-card .field .opt{font-weight:500;color:var(--muted);}
+  .appt-card .form-actions{margin-top:10px;}
+  .appt-card .btn{border:none;cursor:pointer;font-family:inherit;}
+  .appt-note{margin-top:14px;font-size:13px;color:var(--muted);}
+  .appt-status{margin-top:16px;padding:12px 16px;border-radius:14px;background:var(--brand-soft);
+    color:var(--brand-dark);font-size:14px;font-weight:600;text-align:center;}
+  .appt-status[hidden]{display:none;}
+  @media (max-width:560px){.appt-card .booking-form{padding:26px 20px;}}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header id="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <img src="img/dr-zahers-logo.png" alt="Dr. Zahers Aesthetic Dental Center - Dentist in Al Jurf, Ajman" width="150" height="40">
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="about-us.html">About Us</a>
+      <a href="our-service.html">Our Service</a>
+      <a href="faqs.html">FAQs</a>
+      <a href="contact-us.html">Contact Us</a>
+    </nav>
+    <div class="header-actions">
+      <a href="appointment.html" class="btn btn-primary">Book Appointment</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about-us.html">About Us</a></li>
+      <li><a href="our-service.html">Our Service</a></li>
+      <li><a href="faqs.html">FAQs</a></li>
+      <li><a href="contact-us.html">Contact Us</a></li>
+      <li><a href="appointment.html">Book Appointment</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ================= PAGE HERO ================= -->
+<section class="page-hero appt-hero">
+  <div class="wrap" style="max-width:760px;">
+    <span class="eyebrow-pill">APPOINTMENT</span>
+    <h1>Book Your Appointment</h1>
+    <p class="hero-sub">Fill in your details and our team will contact you to confirm a convenient time.</p>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span>/</span><span aria-current="page">Appointment</span>
+    </nav>
+  </div>
+</section>
+
+<!-- ================= APPOINTMENT FORM ================= -->
+<section class="appt-section" id="appointment-form">
+  <div class="wrap">
+    <div class="appt-card">
+      <form class="booking-form" id="apptForm" aria-label="Book an appointment form"
+            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScauGVV-Lam5UfTCucb4tVY7LpdPBc3hmUTsRogdD-u-P2lHQ/formResponse"
+            method="POST" target="apptHiddenFrame">
+
+        <div class="form-row">
+          <div class="field">
+            <label for="apptFirstName">First Name</label>
+            <input id="apptFirstName" name="entry.2070707873" type="text" placeholder="First name" autocomplete="given-name" required>
+          </div>
+          <div class="field">
+            <label for="apptLastName">Last Name</label>
+            <input id="apptLastName" name="entry.1107755455" type="text" placeholder="Last name" autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="apptPhone">Phone Number</label>
+            <input id="apptPhone" name="entry.1895314843" type="tel" placeholder="+971 5x xxx xxxx" autocomplete="tel" pattern="[0-9+\-\s()]{7,20}" required>
+          </div>
+          <div class="field">
+            <label for="apptEmail">Email Address <span class="opt">(optional)</span></label>
+            <input id="apptEmail" name="entry.1377789024" type="email" placeholder="you@example.com" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="apptDate">Preferred Date</label>
+            <input id="apptDate" type="text" placeholder="Select a date" autocomplete="off" required>
+            <input type="hidden" id="apptYear" name="entry.1711041097_year">
+            <input type="hidden" id="apptMonth" name="entry.1711041097_month">
+            <input type="hidden" id="apptDay" name="entry.1711041097_day">
+          </div>
+          <div class="field">
+            <label for="apptPlace">Place</label>
+            <input id="apptPlace" name="entry.930583085" type="text" placeholder="Your location" autocomplete="off" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="apptTreatment">Treatment</label>
+            <select id="apptTreatment" name="entry.735072590" required>
+              <option value="Consultation">Consultation</option>
+              <option value="Dental Implants">Dental Implants</option>
+              <option value="Veneers &amp; Smile Design">Veneers &amp; Smile Design</option>
+              <option value="Cleaning, Polishing &amp; Whitening">Cleaning, Polishing &amp; Whitening</option>
+              <option value="Root Canal Treatment">Root Canal Treatment</option>
+              <option value="Full Mouth Rehabilitation">Full Mouth Rehabilitation</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="apptDoctor">Preferred Doctor</label>
+            <select id="apptDoctor" name="entry.1550509698" required>
+              <option value="No Preference">No Preference</option>
+              <option value="Dr. Zaher Mine">Dr. Zaher Mine &mdash; GP Dentist</option>
+              <option value="Dr. Joji Markose">Dr. Joji Markose &mdash; Specialist Prosthodontist / PhD Implantologist</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Book an Appointment</button>
+        </div>
+        <p class="appt-note">We are open Saturday to Thursday, 9:00 am &ndash; 9:00 pm. Sundays are unavailable.</p>
+        <p class="appt-status" id="apptStatus" role="status" hidden>Thank you! Our team will confirm your appointment shortly.</p>
+      </form>
+    </div>
+  </div>
+</section>
+<iframe name="apptHiddenFrame" style="display:none" aria-hidden="true" tabindex="-1"></iframe>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+  <div class="wrap footer-grid">
+    <div>
+      <div class="logo">
+        <img src="img/dr-zahers-logo.png" alt="Dr. Zahers Aesthetic Dental Center logo" width="150" height="50" style="width:auto;filter:brightness(0) invert(1);opacity:.92;" loading="lazy">
+      </div>
+      <p class="foot-desc">Premium aesthetic and implant dentistry in Al Jurf, Ajman. Personalised care, advanced technology and experienced specialists.<br><b>Your smile deserves the right care.</b></p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li><li><a href="about-us.html">About Us</a></li>
+        <li><a href="our-service.html">Services</a></li><li><a href="faqs.html">FAQ</a></li>
+        <li><a href="contact-us.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="foot-contact">
+      <h3>Contact Us</h3>
+      <p>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Room No. 307, Khalifa Building, Near Ajman Court<br>Al Jurf, Ajman &ndash; U.A.E.</span>
+      </p>
+      <p><svg class="icon" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span><a href="tel:+97167161982">+971 6 716 1982</a> | <a href="tel:+971509868986">+971 50 986 8986</a></span></p>
+      <p><svg class="icon" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span><a href="mailto:info@drzahersdental.com">info@drzahersdental.com</a></span></p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Dr. Zahers Aesthetic Dental Center — Dentist in Al Jurf, Ajman. All rights reserved.</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+<script src="js/script.js" defer></script>
+<script>
+(function () {
+  var form = document.getElementById('apptForm');
+  var dateInput = document.getElementById('apptDate');
+  var yearEl = document.getElementById('apptYear');
+  var monthEl = document.getElementById('apptMonth');
+  var dayEl = document.getElementById('apptDay');
+  var status = document.getElementById('apptStatus');
+  var picker = null;
+
+  function setDateParts(str) {
+    var p = str ? str.split('-') : [];
+    yearEl.value = p[0] || '';
+    monthEl.value = p[1] ? parseInt(p[1], 10) : '';
+    dayEl.value = p[2] ? parseInt(p[2], 10) : '';
+  }
+
+  if (window.flatpickr) {
+    picker = flatpickr(dateInput, {
+      dateFormat: 'Y-m-d',
+      altInput: true,
+      altFormat: 'D, d M Y',
+      altInputClass: '',
+      minDate: 'today',
+      disable: [function (d) { return d.getDay() === 0; }], // no Sundays
+      onChange: function (sel, str) { setDateParts(str); }
+    });
+    // altInput replaces the visible field, so keep "required" on it
+    if (picker.altInput) {
+      picker.altInput.required = true;
+      picker.altInput.setAttribute('aria-label', 'Preferred Date');
+      picker.altInput.id = 'apptDateDisplay';
+      var lbl = document.querySelector('label[for="apptDate"]');
+      if (lbl) lbl.setAttribute('for', 'apptDateDisplay');
+    }
+  } else {
+    // Flatpickr unavailable: fall back to the native date picker
+    dateInput.type = 'date';
+    dateInput.min = new Date().toISOString().split('T')[0];
+    dateInput.addEventListener('change', function () { setDateParts(dateInput.value); });
+  }
+
+  form.addEventListener('submit', function () {
+    // Native validation has already passed. The form posts to Google Forms
+    // through the hidden iframe, so the page stays put.
+    status.hidden = false;
+    setTimeout(function () {
+      form.reset();
+      if (picker) picker.clear();
+      setDateParts('');
+    }, 300);
+  });
+})();
+</script>
+</body>
+</html>

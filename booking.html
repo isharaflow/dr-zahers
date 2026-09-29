@@ -169,6 +169,43 @@
     font-size: 0.95rem;
   }
 
+  /* ---- Search & filters ---- */
+  .cr-filters { margin-bottom: 18px; display: grid; gap: 10px; }
+  .cr-search { position: relative; }
+  .cr-search svg {
+    position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+    width: 17px; height: 17px; color: var(--muted, #8a7768); pointer-events: none;
+  }
+  .cr-filters input[type="search"] {
+    width: 100%; height: 44px; border-radius: 10px; border: 1px solid rgba(74,47,31,0.18);
+    background: #fbf8f6; font: inherit; font-size: 0.92rem; color: var(--brand-ink, #2a1810);
+  }
+  .cr-filters input[type="search"] { padding: 0 14px 0 39px; }
+  .cr-filters input[type="search"]:focus-visible { outline: 2px solid var(--brand, #6b4530); outline-offset: 1px; }
+  .cr-count-badge.is-filtered { background: #2e7dd6; }
+
+  /* ---- Appointment time + WhatsApp notification ---- */
+  .cr-notify {
+    margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(74,47,31,0.22);
+    display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+  }
+  .cr-time-select {
+    height: 40px; min-width: 150px; padding: 0 32px 0 12px; border-radius: 10px;
+    border: 1px solid rgba(74,47,31,0.18); background-color: #fff; font: inherit; font-size: 0.88rem;
+    color: var(--brand-ink, #2a1810); cursor: pointer; appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b4530' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 11px center; background-size: 15px;
+  }
+  .cr-time-select:focus-visible { outline: 2px solid var(--brand, #6b4530); outline-offset: 1px; }
+  .cr-btn-wa { background: #128c4a; color: #fff; border-color: #128c4a; display: inline-flex; align-items: center; gap: 7px; }
+  .cr-btn-wa:hover { background: #0e723b; border-color: #0e723b; }
+  .cr-btn-wa[hidden] { display: none; }
+  .cr-btn-wa:disabled { opacity: .5; cursor: not-allowed; }
+  .cr-btn-wa svg { width: 16px; height: 16px; flex: none; }
+  .cr-notify-note { font-size: 0.78rem; color: var(--text-muted, #6b5d54); }
+  .cr-notify-note.is-sent { color: #0e723b; font-weight: 600; }
+  .cr-notify-note.is-warn { color: #b3261e; }
+
   .cr-req-card {
     border: 1px solid rgba(74,47,31,0.1);
     border-radius: 12px;
@@ -277,6 +314,12 @@
 				<h5 class="cr-card-title" id="resultsTitle">Requests</h5>
 				<span class="cr-count-badge" id="countBadge">0</span>
 			  </div>
+			  <div class="cr-filters" role="search" aria-label="Search requests">
+				<div class="cr-search">
+				  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+				  <input type="search" id="searchInput" placeholder="Search name, phone or email on this date" aria-label="Search requests for the selected date by name, phone or email" autocomplete="off">
+				</div>
+			  </div>
 			  <div id="results" class="cr-results-list">
 				<div class="cr-empty">Loading…</div>
 			  </div>
@@ -321,7 +364,7 @@
         <svg class="icon" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
         <span><span itemprop="streetAddress">Room No. 307, Khalifa Building, Near Ajman Court</span><br><span itemprop="addressLocality">Al Jurf, Ajman</span> – <span itemprop="addressCountry">U.A.E.</span></span>
       </p>
-      <p><svg class="icon" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span><a href="tel:+97167161982" itemprop="telephone">+971 6 716 1982</a> · <a href="tel:+971509868986">+971 50 986 8986</a></span></p>
+      <p><svg class="icon" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span><a href="tel:+97167161982" itemprop="telephone">+971 6 716 1982</a> | <a href="tel:+971509868986">+971 50 986 8986</a></span></p>
       <p><svg class="icon" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span><a href="mailto:info@drzahersdental.com" itemprop="email">info@drzahersdental.com</a></span></p>
       <div class="social-row">
         <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Dr. Zahers Aesthetic Dental Center on Facebook" class="social-btn">
@@ -402,6 +445,8 @@ const SHEET_URL = '';
   const resultsTitleEl = document.getElementById('resultsTitle');
   const countBadgeEl = document.getElementById('countBadge');
   const datePickerInput = document.getElementById('datePicker');
+  const searchInput = document.getElementById('searchInput');
+  let selectedDate = '';
 
   let allRows = [];
   let groupedByDate = {};
@@ -444,29 +489,197 @@ const SHEET_URL = '';
     return Array.from(unique).sort();
   }
 
-  function renderResultsForDate(dateStr) {
-    const rows = groupedByDate[dateStr] || [];
+  function fullName(row) {
+    return ((row.firstName || '') + ' ' + (row.lastName || '')).trim();
+  }
+
+  // Search only (name, phone, email) - applied to the selected date's requests
+  function matchesSearch(row) {
+    const q = searchInput.value.trim().toLowerCase();
+    if (!q) return true;
+    const digits = q.replace(/\D/g, '');
+    const phoneDigits = String(row.phoneNumber || '').replace(/\D/g, '');
+    const haystack = [fullName(row), row.phoneNumber, row.emailAddress].join(' ').toLowerCase();
+    return haystack.includes(q) || (digits.length >= 3 && phoneDigits.includes(digits));
+  }
+
+  /* ---------- Appointment time + WhatsApp notification ---------- */
+  const CLINIC_NAME = 'Dr. Zahers Aesthetic Dental Center';
+  const CLINIC_ADDRESS = 'Room No. 307, Khalifa Building, Near Ajman Court, Al Jurf, Ajman';
+  const CLINIC_PHONE = '+971 6 716 1982';
+  const STORE_KEY = 'crAppointmentTimes';
+  const rowMap = {};
+
+  // 09:00 - 20:30 in 30-minute steps (clinic closes at 21:00)
+  const TIME_SLOTS = [];
+  for (let m = 9 * 60; m <= 20 * 60 + 30; m += 30) {
+    TIME_SLOTS.push(String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'));
+  }
+
+  function formatTime(hhmm) {
+    if (!hhmm) return '';
+    const [h, m] = hhmm.split(':').map(Number);
+    return (h % 12 || 12) + ':' + String(m).padStart(2, '0') + ' ' + (h >= 12 ? 'PM' : 'AM');
+  }
+
+  const TIME_OPTIONS_HTML = '<option value="">Select time</option>' +
+    TIME_SLOTS.map(t => `<option value="${t}">${formatTime(t)}</option>`).join('');
+
+  function loadStore() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; }
+  }
+  function saveStore() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) { /* storage unavailable */ }
+  }
+  let store = loadStore();
+
+  function rowKey(row) {
+    return [row.dateKey || '', String(row.phoneNumber || '').replace(/\D/g, ''),
+            String(row.firstName || '').toLowerCase(), row.treatment || ''].join('|');
+  }
+
+  // Turns a phone number into WhatsApp's international format (digits only).
+  // "+971 50 986 8986" / "050 986 8986" / "50 986 8986" -> 971509868986
+  function toWhatsAppNumber(raw) {
+    const s = String(raw || '').trim();
+    let d = s.replace(/\D/g, '');
+    if (!d) return '';
+    if (s.startsWith('+')) return d.length >= 8 ? d : '';
+    if (d.startsWith('00')) d = d.slice(2);
+    else if (d.startsWith('0')) d = '971' + d.slice(1);
+    else if (d.length === 9 && d.startsWith('5')) d = '971' + d;
+    return d.length >= 8 && d.length <= 15 ? d : '';
+  }
+
+  function buildMessage(row, time) {
+    return [
+      `Hello ${row.firstName || ''}${row.lastName ? ' ' + row.lastName : ''},`,
+      '',
+      `Your appointment at ${CLINIC_NAME} is confirmed.`,
+      '',
+      `Date: ${formatDisplayDate(row.dateKey)}`,
+      `Time: ${formatTime(time)}`,
+      `Treatment: ${row.treatment || '-'}`,
+      `Doctor: ${row.preferredDoctor || 'No preference'}`,
+      `Location: ${CLINIC_ADDRESS}`,
+      '',
+      `To reschedule, please call ${CLINIC_PHONE}.`,
+      'We look forward to seeing you.'
+    ].join('\n');
+  }
+
+  function formatSentAt(iso) {
+    return new Date(iso).toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+  }
+
+  // Shows/hides the send button and note for one entry from its saved state
+  function syncNotify(entry) {
+    const key = entry.dataset.key;
+    const row = rowMap[key];
+    const st = store[key] || {};
+    const select = entry.querySelector('.cr-time-select');
+    const btn = entry.querySelector('.cr-btn-wa');
+    const note = entry.querySelector('.cr-notify-note');
+    const number = toWhatsAppNumber(row && row.phoneNumber);
+
+    select.value = st.time || '';
+    btn.hidden = !select.value;
+    btn.disabled = !number;
+    note.className = 'cr-notify-note';
+    note.textContent = '';
+
+    if (!number) {
+      note.classList.add('is-warn');
+      note.textContent = 'No valid WhatsApp number on file.';
+    } else if (select.value && st.sentAt && st.sentTime === st.time) {
+      btn.lastChild.textContent = ' Resend notification';
+      note.classList.add('is-sent');
+      note.textContent = 'Sent ' + formatSentAt(st.sentAt) + ' for ' + formatTime(st.time);
+    } else {
+      btn.lastChild.textContent = ' Send notification';
+    }
+  }
+
+  resultsEl.addEventListener('change', function (e) {
+    if (!e.target.classList.contains('cr-time-select')) return;
+    const entry = e.target.closest('.cr-entry');
+    const key = entry.dataset.key;
+    store[key] = Object.assign({}, store[key], { time: e.target.value });
+    saveStore();
+    syncNotify(entry);
+  });
+
+  resultsEl.addEventListener('click', function (e) {
+    const btn = e.target.closest('.cr-btn-wa');
+    if (!btn) return;
+    const entry = btn.closest('.cr-entry');
+    const key = entry.dataset.key;
+    const row = rowMap[key];
+    const time = entry.querySelector('.cr-time-select').value;
+    const number = toWhatsAppNumber(row && row.phoneNumber);
+    if (!row || !time || !number) return;
+
+    const url = 'https://wa.me/' + number + '?text=' + encodeURIComponent(buildMessage(row, time));
+    window.open(url, '_blank', 'noopener');
+
+    store[key] = { time: time, sentTime: time, sentAt: new Date().toISOString() };
+    saveStore();
+    syncNotify(entry);
+  });
+
+  const WA_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.28-1.38a9.9 9.9 0 0 0 4.7 1.2h.01c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.15c-.24.68-1.4 1.32-1.93 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.29.57-.36.76-.36h.55c.18 0 .42-.07.65.5.24.58.83 2 .9 2.15.07.15.12.32.02.51-.1.19-.15.31-.3.48-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.03 1.12.99 2.06 1.3 2.35 1.45.29.15.46.13.63-.08.17-.2.72-.84.91-1.13.19-.29.38-.24.63-.14.26.1 1.65.78 1.93.92.29.14.48.21.55.33.07.12.07.7-.17 1.38Z"/></svg>';
+
+  function renderResults() {
+    const searching = !!searchInput.value.trim();
+    const scope = groupedByDate[selectedDate] || [];
+    const rows = scope.filter(matchesSearch);
+
     resultsEl.innerHTML = '';
-    resultsTitleEl.textContent = dateStr ? `Requests for ${formatDisplayDate(dateStr)}` : 'Requests';
-    countBadgeEl.textContent = rows.length;
+    resultsTitleEl.textContent = selectedDate ? `Requests for ${formatDisplayDate(selectedDate)}` : 'Requests';
+    countBadgeEl.textContent = searching ? `${rows.length} of ${scope.length}` : rows.length;
+    countBadgeEl.classList.toggle('is-filtered', searching);
 
     if (rows.length === 0) {
-      resultsEl.innerHTML = `<div class="cr-empty">No consultation requests found for ${formatDisplayDate(dateStr)}.</div>`;
+      resultsEl.innerHTML = searching
+        ? `<div class="cr-empty">No requests match your search on ${formatDisplayDate(selectedDate)}.</div>`
+        : `<div class="cr-empty">No consultation requests found for ${formatDisplayDate(selectedDate)}.</div>`;
       return;
     }
 
-    rows.forEach(row => {
+    Object.keys(rowMap).forEach(k => delete rowMap[k]);
+    rows.forEach((row, i) => {
+      const key = rowKey(row);
+      rowMap[key] = row;
       const entry = document.createElement('div');
       entry.className = 'cr-entry';
+      entry.dataset.key = key;
+      const name = escapeHtml(fullName(row) || 'patient');
       entry.innerHTML = `
         <h6>${escapeHtml(row.firstName || 'Unnamed')}${row.lastName ? ' ' + escapeHtml(row.lastName) : ''}</h6>
         <div class="cr-row"><span class="cr-label">Phone:</span><a href="tel:${escapeHtml(row.phoneNumber || '-')}">${escapeHtml(row.phoneNumber || '-')}</a></div>
         <div class="cr-row"><span class="cr-label">Email:</span><a href="mailto:${escapeHtml(row.emailAddress || '-')}">${escapeHtml(row.emailAddress || '-')}</a></div>
         <div class="cr-row"><span class="cr-label">Treatment:</span><span>${escapeHtml(row.treatment || '-')}</span></div>
         <div class="cr-row"><span class="cr-label">Doctor:</span><span>${escapeHtml(row.preferredDoctor || '-')}</span></div>
+        <div class="cr-notify">
+          <select class="cr-time-select" aria-label="Appointment time for ${name}">${TIME_OPTIONS_HTML}</select>
+          <button type="button" class="cr-btn cr-btn-wa" hidden>${WA_ICON}<span> Send notification</span></button>
+          <span class="cr-notify-note" role="status"></span>
+        </div>
       `;
       resultsEl.appendChild(entry);
+      syncNotify(entry);
     });
+  }
+
+  function renderResultsForDate(dateStr) {
+    selectedDate = dateStr;
+    renderResults();
+  }
+
+  // Picking a date on the calendar clears any search and shows that day
+  function selectDate(dateStr) {
+    searchInput.value = '';
+    renderResultsForDate(dateStr);
   }
 
   function initCalendar(selectedDate) {
@@ -490,7 +703,7 @@ const SHEET_URL = '';
         }
       },
       onChange: function (selectedDates, dateStr) {
-        if (dateStr) renderResultsForDate(dateStr);
+        if (dateStr) selectDate(dateStr);
       }
     });
   }
@@ -524,9 +737,12 @@ const SHEET_URL = '';
   document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('todayBtn').addEventListener('click', function () {
       const today = todayIso();
-      if (flatpickrInstance) flatpickrInstance.setDate(today, true);
-      renderResultsForDate(today);
+      if (flatpickrInstance) flatpickrInstance.setDate(today, false);
+      selectDate(today);
     });
+
+    /* ---------- Search (selected date only) ---------- */
+    searchInput.addEventListener('input', renderResults);
 
     document.getElementById('refreshBtn').addEventListener('click', loadData);
 
