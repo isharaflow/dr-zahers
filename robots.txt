@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /booking.html
+Disallow: /new-booking.html
+
+Sitemap: https://www.drzahersdental.com/sitemap.xml
