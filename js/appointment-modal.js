@@ -161,14 +161,15 @@
               '<label for="aptPopupDoctor">Preferred Doctor</label>' +
               '<select id="aptPopupDoctor" name="entry.1550509698" required>' +
                 '<option value="No Preference">No Preference</option>' +
-                '<option value="Dr. Zaher Mine">Dr. Zaher Mine — GP Dentist</option>' +
-                '<option value="Dr. Joji Markose">Dr. Joji Markose — Specialist Prosthodontist / PhD Implantologist</option>' +
+                '<option value="Dr. Zaher Mine">Dr. Zaher Mine</option>' +
+                '<option value="Dr. Joji Markose">Dr. Joji Markose</option>' +
               '</select>' +
             '</div>' +
           '</div>' +
           '<div class="apt-form-actions">' +
             '<button type="submit" class="apt-btn-primary">Book an Appointment</button>' +
           '</div>' +
+		  '<p class="appt-note">We are open <strong>10:00 am – 9:00 pm every day, including Sunday</strong>, except <strong>Thursday and Friday</strong>, when we are open from  <strong>1:00 pm – 9:00 pm</strong>.</p>' +
           '<p class="apt-modal-status" id="aptPopupStatus" hidden>Thank you! Our team will confirm your appointment shortly.</p>' +
         '</form>' +
       '</div>' +
@@ -215,7 +216,7 @@
     };
     script.onerror = function () {
       // Offline / blocked — fall back to a plain native date input so
-      // booking still works, just without the Sunday restriction.
+      // booking still works with a plain date input.
       callback();
     };
     document.head.appendChild(script);
@@ -230,16 +231,11 @@
         dateFormat: 'Y-m-d',    // value stored/submitted as YYYY-MM-DD
         altInput: true,         // shows a friendlier display format
         altFormat: 'D, d M Y',  // e.g. "Mon, 15 Sep 2026"
-        minDate: 'today',
-        disable: [
-          function (date) {
-            return date.getDay() === 0; // 0 = Sunday — disables every Sunday
-          }
-        ]
+        minDate: 'today'   // Sundays are now bookable (no days are disabled)
       });
     } else {
       // Flatpickr failed to load — fall back to a native date picker
-      // (no Sunday restriction, but still usable).
+      // (still usable).
       dateInput.type = 'date';
       dateInput.removeAttribute('readonly');
     }

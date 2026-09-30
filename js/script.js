@@ -51,10 +51,10 @@
 
   // testimonials carousel
   const testimonials = [
-    { name:'Ahmed Al Mansoori', time:'1 month ago', text:'The experience was excellent! Everything was explained clearly, and I felt comfortable throughout. The clinic is modern, clean, and welcoming. I highly recommend giving Dr. Zaher’s Softhance a try at least once!' },
+    { name:'Ahmed Al Mansoori', time:'1 month ago', text:'Masha Allah! The experience was excellent! Everything was explained clearly, and I felt comfortable the whole time. The dental centre is modern, clean, and welcoming. I highly recommend trying Dr. Zaher’s Softhance at least once!' },
     { name:'Fatima Al Nuaimi', time:'2 months ago', text:'I was very nervous about dental treatment, but the team made me feel completely at ease. Everything was explained patiently and professionally. Highly recommended.' },
     { name:'Mohammed Al Mazrouei', time:'3 weeks ago', text:'Very professional and caring team. I appreciated how carefully my treatment was planned and how clearly all the options were explained to me.' },
-    { name:'Hessa Al Marri', time:'2 weeks ago', text:'The clinic provides a calm and comfortable environment. I felt well informed throughout my treatment and was very happy with the overall experience.' }
+    { name:'Hessa Al Marri', time:'2 weeks ago', text:'The dental centre provides a calm and comfortable environment. I felt well informed throughout my treatment and was very happy with the overall experience.' }
   ];
   let testimonialIndex = 0;
   const tName = document.getElementById('testimonialName');
@@ -254,12 +254,7 @@
 
       minDate: 'today',
 
-      disable: [
-        function (date) {
-          // Sunday = 0
-          return date.getDay() === 0;
-        }
-      ],
+      // Sundays are now bookable (no days are disabled)
 
       onChange: function (selectedDates, dateStr) {
 

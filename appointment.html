@@ -151,8 +151,8 @@
             <label for="apptDoctor">Preferred Doctor</label>
             <select id="apptDoctor" name="entry.1550509698" required>
               <option value="No Preference">No Preference</option>
-              <option value="Dr. Zaher Mine">Dr. Zaher Mine &mdash; GP Dentist</option>
-              <option value="Dr. Joji Markose">Dr. Joji Markose &mdash; Specialist Prosthodontist / PhD Implantologist</option>
+              <option value="Dr. Zaher Mine">Dr. Zaher Mine</option>
+              <option value="Dr. Joji Markose">Dr. Joji Markose</option>
             </select>
           </div>
         </div>
@@ -160,7 +160,7 @@
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">Book an Appointment</button>
         </div>
-        <p class="appt-note">We are open Saturday to Thursday, 9:00 am &ndash; 9:00 pm. Sundays are unavailable.</p>
+        <p class="appt-note">We are open <strong>10:00 am – 9:00 pm every day, including Sunday</strong>, except <strong>Thursday and Friday</strong>, when we are open from  <strong>1:00 pm – 9:00 pm</strong>.</p>
         <p class="appt-status" id="apptStatus" role="status" hidden>Thank you! Our team will confirm your appointment shortly.</p>
       </form>
     </div>
@@ -224,7 +224,6 @@
       altFormat: 'D, d M Y',
       altInputClass: '',
       minDate: 'today',
-      disable: [function (d) { return d.getDay() === 0; }], // no Sundays
       onChange: function (sel, str) { setDateParts(str); }
     });
     // altInput replaces the visible field, so keep "required" on it
