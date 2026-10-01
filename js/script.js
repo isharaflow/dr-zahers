@@ -619,3 +619,66 @@
   });
 
 })();
+
+/* ------------------------------------------------------------------
+ * Clean URLs: scroll to in-page sections WITHOUT showing #id in the URL
+ * ------------------------------------------------------------------ */
+(function () {
+  function headerOffset() {
+    var h = document.getElementById('site-header');
+    return h ? h.offsetHeight + 10 : 0;
+  }
+
+  function scrollToId(id) {
+    var target = document.getElementById(id);
+    if (!target) return false;
+    var top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset();
+    window.scrollTo({ top: top, behavior: 'smooth' });
+    return true;
+  }
+
+  function cleanUrl() {
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }
+
+  // treat "/our-service", "/our-service.html" and "/our-service/" as the same page
+  function normPath(p) {
+    return p.replace(/index\.html$/, '').replace(/\.html$/, '').replace(/\/+$/, '') || '/';
+  }
+
+  // 1) Clicks on same-page links: href="#id" AND href="this-page.html#id"
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="#"]');
+    if (!a) return;
+
+    // ignore modified clicks / new-tab links
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || a.target === '_blank') return;
+
+    // only links that point to the page we are already on
+    if (a.origin !== window.location.origin) return;
+    if (normPath(a.pathname) !== normPath(window.location.pathname)) return;
+
+    var id = decodeURIComponent(a.hash.slice(1));
+    if (!id) return;                                   // plain "#"
+
+    // Let the appointment popup handle its own links
+    if (id === 'book-appointment' && typeof window.openAppointmentModal === 'function') return;
+
+    if (scrollToId(id)) {
+      e.preventDefault();                              // stops the URL from changing
+      cleanUrl();
+    }
+  });
+
+  // 2) Arriving from another page, e.g. about-us.html#our-specialists
+  window.addEventListener('load', function () {
+    var id = window.location.hash.slice(1);
+    if (!id) return;
+    setTimeout(function () {
+      scrollToId(id);
+      cleanUrl();
+    }, 100);
+  });
+})();
