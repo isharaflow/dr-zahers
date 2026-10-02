@@ -51,7 +51,7 @@
 
   // testimonials carousel
   const testimonials = [
-    { name:'Ahmed Al Mansoori', time:'1 month ago', text:'Masha Allah! The experience was excellent! Everything was explained clearly, and I felt comfortable the whole time. The dental centre is modern, clean, and welcoming. I highly recommend trying Dr. Zaher’s Softhance at least once!' },
+    { name:'Ahmed Al Mansoori', time:'1 month ago', text:'Masha Allah! The experience was excellent! Everything was explained clearly, and I felt comfortable the whole time. The dental centre is modern, clean, and welcoming. I highly recommend trying Dr. Zaher’s soft hands at least once!' },
     { name:'Fatima Al Nuaimi', time:'2 months ago', text:'I was very nervous about dental treatment, but the team made me feel completely at ease. Everything was explained patiently and professionally. Highly recommended.' },
     { name:'Mohammed Al Mazrouei', time:'3 weeks ago', text:'Very professional and caring team. I appreciated how carefully my treatment was planned and how clearly all the options were explained to me.' },
     { name:'Hessa Al Marri', time:'2 weeks ago', text:'The dental centre provides a calm and comfortable environment. I felt well informed throughout my treatment and was very happy with the overall experience.' }
@@ -85,16 +85,6 @@
     });
   }
   renderTestimonial();
-
-  // services carousel arrows
-  const servicesCarousel = document.getElementById('servicesCarousel');
-  const servicesPrev = document.getElementById('servicesPrev');
-  const servicesNext = document.getElementById('servicesNext');
-  if (servicesCarousel && servicesPrev && servicesNext) {
-    const scrollAmount = () => (servicesCarousel.querySelector('.service-card')?.offsetWidth || 260) + 22;
-    servicesPrev.addEventListener('click', () => servicesCarousel.scrollBy({ left: -scrollAmount(), behavior: 'smooth' }));
-    servicesNext.addEventListener('click', () => servicesCarousel.scrollBy({ left: scrollAmount(), behavior: 'smooth' }));
-  }
 
   // FAQ accordion
   document.querySelectorAll('.faq-item').forEach(item => {
