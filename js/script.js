@@ -135,6 +135,8 @@
   var nextBtn = document.getElementById('heroNext');
   var total = slides.length;
   var index = 0;
+  // enable fade transitions only after first paint so the first slide shows instantly
+  window.addEventListener('load', function(){ requestAnimationFrame(function(){ slider.classList.add('is-ready'); }); });
   var timer = null;
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
